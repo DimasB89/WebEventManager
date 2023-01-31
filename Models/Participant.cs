@@ -1,23 +1,27 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Collections;
 
 namespace WebEventManager.Models
 {
     
     public class Participant
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)] public int ParticipantID { get; set; }
-        public int NumberOfParticipants { get; set; }
-        public string Name { get; set; }
+        [Key] 
+        public int ParticipantID { get; set; }
+        
         public ICollection<Attendance> Attendances { get; set; }
 
-        /*public Participant(PaymentMenthod payMethod, string info = "")
-        {
-            PaymentMenthod = payMethod;
-            AdditionalInformation = info;
-        }*/
+        public PrivatePerson Person { get; set; }
+        public Company Company { get; set; }
+
+        public Participant() { }
+        public Participant(string firstName, string lastName, long personalID) {
+            Person = new PrivatePerson(firstName, lastName, personalID);
+        }
+        public Participant(string companyName, int registryNumber, int numberOfParticipants) {
+            Company = new Company(companyName, registryNumber, numberOfParticipants);        
+        }
 
     }
 }
