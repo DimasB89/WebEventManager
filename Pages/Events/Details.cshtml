@@ -30,10 +30,28 @@
             @Html.DisplayFor(model => model.Event.Place)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Event.AdditionalInformation)
+            Osavytjad:
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.AdditionalInformation)
+            <table class="table">
+                <tbody>
+                    @foreach (var item in Model.GetParticipants)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.id)
+                            </td>
+                            <td>
+                                @*<a asp-page="./Participants/Details" asp-route-id="@item.EventID">Osavytjad</a>
+                                <a asp-page="./Participants/Delete" asp-route-id="@item.EventID">Kustuta</a>*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </dd>
     </dl>
 </div>

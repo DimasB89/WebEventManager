@@ -9,18 +9,22 @@ namespace WebEventManager.Models
     {
         [Key] 
         public int ParticipantID { get; set; }
+        //public int PrivatePersonID { get; set; }
+        //public int CompanyID { get; set; }
         
         public ICollection<Attendance> Attendances { get; set; }
 
-        public PrivatePerson Person { get; set; }
-        public Company Company { get; set; }
+        public virtual PrivatePerson Person { get; set; }
+        public virtual Company Company { get; set; }
 
         public Participant() { }
         public Participant(string firstName, string lastName, long personalID) {
             Person = new PrivatePerson(firstName, lastName, personalID);
+            //PrivatePersonID = Person.PrivatePersonID;
         }
         public Participant(string companyName, int registryNumber, int numberOfParticipants) {
-            Company = new Company(companyName, registryNumber, numberOfParticipants);        
+            Company = new Company(companyName, registryNumber, numberOfParticipants);
+            //CompanyID = Company.CompanyID;
         }
 
     }

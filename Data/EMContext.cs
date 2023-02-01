@@ -17,12 +17,16 @@ namespace WebEventManager.Data
         public DbSet<WebEventManager.Models.Participant> Participants { get; set; } = default!;
         public DbSet<WebEventManager.Models.Attendance> Attendances { get; set; } = default!;
         public DbSet<WebEventManager.Models.Event> Events { get; set; } = default!;
+        public DbSet<Company> Companies { get; set; } = default!;
+        public DbSet<PrivatePerson> PrivatePersons { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Event>().ToTable("Event");
             modelBuilder.Entity<Attendance>().ToTable("Attendance");
             modelBuilder.Entity<Participant>().ToTable("Participant");
+            modelBuilder.Entity<Company>().ToTable("Company");
+            modelBuilder.Entity<PrivatePerson>().ToTable("PrivatePerson");
         }
     }
 }
