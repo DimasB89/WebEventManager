@@ -9,9 +9,7 @@
         <div class="row no-gutters border mb-4">
             <div class="col p-4 mb-4 ">
                 <p class="card-text">
-                    Contoso University is a sample application that
-                    demonstrates how to use Entity Framework Core in an
-                    ASP.NET Core Razor Pages web app.
+                    Sed faucibus nibh enim, sed cursus est varius quis. Duis id metus sit amet ligula ultricies hendrerit. Suspendisse nunc metus, venenatis finibus tellus lacinia, viverra luctus leo. Sed eu eros vel felis mollis aliquet. Cras vel viverra tellus. Donec dapibus bibendum ornare. In convallis eleifend orci, eu efficitur purus vulputate ac.
                 </p>
             </div>
         </div>
@@ -20,7 +18,7 @@
         <div class="row no-gutters border mb-4">
             <div class="col p-4 d-flex flex-column position-static">
                 <p class="card-text mb-auto">
-                    You can build the application by following the steps in a series of tutorials.
+                    here is going to be an image later
                 </p>
                 <p>
                     @*                    <a href="https://docs.microsoft.com/aspnet/core/data/ef-rp/intro" class="stretched-link">See the tutorial</a>
@@ -29,17 +27,56 @@
             </div>
         </div>
     </div>
+
+</div>
+<div class="row mb-auto">
     <div class="col-md-4">
-        <div class="row no-gutters border mb-4">
-            <div class="col p-4 d-flex flex-column">
-                <p class="card-text mb-auto">
-                    You can download the completed project from GitHub.
-                </p>
-                <p>
-                    @*                    <a href="https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-rp/intro/samples" class="stretched-link">See project source code</a>
-                    *@
-                </p>
-            </div>
-        </div>
+        <h3>Upcoming Events</h3>
+        <table class="table">
+            <tbody>
+                @foreach (var item in Model.GetUpcomingEvents)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateTime)
+                        </td>
+                        <td>
+                            <a asp-page="./Events/Details" asp-route-id="@item.EventID">Osavytjad</a>
+                            <a asp-page="./Events/Delete" asp-route-id="@item.EventID" class="btn">
+                                <img src="~/images/remove.svg" />
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <p>
+            <a asp-page="./Events/Create">Lisa Yritus</a>
+        </p>
+    </div>
+
+    <div class="col-md-4">
+        <h3>Past Events</h3>
+        <table class="table">
+            <tbody>
+                @foreach (var item in Model.GetPastEvents)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateTime)
+                        </td>
+                        <td>
+                            <a asp-page="./Events/Details" asp-route-id="@item.EventID">Osavytjad</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
