@@ -5,6 +5,26 @@
     ViewData["Title"] = "Details";
 }
 
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("input[name='ParticipantType']").change(function () {
+                var selectedType = $("input[name='ParticipantType']:checked").val();
+                if (selectedType === "PrivatePerson") {
+                    $("#privatePersonFields").show();
+                    $("#companyFields").hide();
+                } else if (selectedType === "Company") {
+                    $("#privatePersonFields").hide();
+                    $("#companyFields").show();
+                }
+            });
+        });
+    </script>
+</head>
+
+
 <h1>Details</h1>
 
 <div>
@@ -46,7 +66,7 @@
                             </td>
                             <td>
                                 @*<a asp-page="./Participants/Details" asp-route-id="@item.EventID">Osavytjad</a>
-                                <a asp-page="./Participants/Delete" asp-route-id="@item.EventID">Kustuta</a>*@
+                            <a asp-page="./Participants/Delete" asp-route-id="@item.EventID">Kustuta</a>*@
                             </td>
                         </tr>
                     }
@@ -55,7 +75,104 @@
         </dd>
     </dl>
 </div>
+
+<h4>Add Participant</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div class="form-group">
+                <label for="participantType">Participant Type:</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ParticipantType" id="privatePersonRadio" value="PrivatePerson">
+                    <label class="form-check-label" for="privatePersonRadio">Private Person</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ParticipantType" id="companyRadio" value="Company">
+                    <label class="form-check-label" for="companyRadio">Company</label>
+                </div>
+            </div>
+
+            <div id="privatePersonFields" style="display:none;">
+                <!-- Private Person form inputs go here -->
+                <div class="form-group">
+                    <label asp-for="NewPrivatePerson.FirstName" class="control-label"></label>
+                    <input asp-for="NewPrivatePerson.FirstName" class="form-control" />
+                    <span asp-validation-for="NewPrivatePerson.FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NewPrivatePerson.LastName" class="control-label"></label>
+                    <input asp-for="NewPrivatePerson.LastName" class="form-control" />
+                    <span asp-validation-for="NewPrivatePerson.LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NewPrivatePerson.PersonalID" class="control-label"></label>
+                    <input asp-for="NewPrivatePerson.PersonalID" class="form-control" />
+                    <span asp-validation-for="NewPrivatePerson.PersonalID" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NewAttendance.PaymentMethod" class="control-label"></label>
+                    <select asp-for="NewAttendance.PaymentMethod" class="form-control">
+                        <option value="CreditCard">Credit Card</option>
+                        <option value="Cash">Cash</option>
+                    </select>
+                    <span asp-validation-for="NewAttendance.PaymentMethod" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NewAttendance.AdditionalInformation" class="control-label"></label>
+                    <input asp-for="NewAttendance.AdditionalInformation" class="form-control" />
+                    <span asp-validation-for="NewAttendance.AdditionalInformation" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div id="companyFields" style="display:none;">
+                <!-- Company form inputs go here -->
+                <div class="form-group">
+                    <label asp-for="NewCompany.Name" class="control-label"></label>
+                    <input asp-for="NewCompany.Name" class="form-control" />
+                    <span asp-validation-for="NewCompany.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NewCompany.RegistryNumber" class="control-label"></label>
+                    <input asp-for="NewCompany.RegistryNumber" class="form-control" />
+                    <span asp-validation-for="NewCompany.RegistryNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NewCompany.NumberOfParticipants" class="control-label"></label>
+                    <input asp-for="NewCompany.NumberOfParticipants" class="form-control" />
+                    <span asp-validation-for="NewCompany.NumberOfParticipants" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NewAttendance.PaymentMethod" class="control-label"></label>
+                    <select asp-for="NewAttendance.PaymentMethod" class="form-control">
+                        <option value="CreditCard">Credit Card</option>
+                        <option value="Cash">Cash</option>
+                    </select>
+                    <span asp-validation-for="NewAttendance.PaymentMethod" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NewAttendance.AdditionalInformation" class="control-label"></label>
+                    <input asp-for="NewAttendance.AdditionalInformation" class="form-control" />
+                    <span asp-validation-for="NewAttendance.AdditionalInformation" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+            
+        </form>
+
+    </div>
+</div>
+
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Event?.EventID">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

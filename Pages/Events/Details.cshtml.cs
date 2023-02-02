@@ -23,6 +23,16 @@ namespace WebEventManager.Pages.Events
         }
 
         public Event Event { get; set; }
+
+        //[BindProperty]
+        //public Participant NewParticipant { get; set; }
+        [BindProperty]
+        public Company NewCompany { get; set; }
+        [BindProperty]
+        public PrivatePerson NewPrivatePerson { get; set; }
+        [BindProperty]
+        public Attendance NewAttendance { get; set; }
+
         public IEnumerable<(string name, long id)> GetParticipants { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -37,7 +47,7 @@ namespace WebEventManager.Pages.Events
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 Event = evento;
             }
@@ -45,11 +55,11 @@ namespace WebEventManager.Pages.Events
             /*participants.AddRange(from Attendance a in _context.Attendances.ToList()
                                    where a.EventID.Equals(Event.EventID)
                                    select _context.Participants.Find(a.ParticipantID));*/
-            foreach(Attendance a in _context.Attendances.ToList())
+            foreach (Attendance a in _context.Attendances.ToList())
             {
                 if (a.EventID.Equals(Event.EventID))
                 {
-                    foreach(Participant p in _context.Participants.ToList())
+                    foreach (Participant p in _context.Participants.ToList())
                     {
                         if (a.ParticipantID.Equals(p.ParticipantID))
                         {
@@ -62,14 +72,14 @@ namespace WebEventManager.Pages.Events
 
             foreach (var participant in participants)
             {
-                foreach(PrivatePerson person in _context.PrivatePersons)
+                foreach (PrivatePerson person in _context.PrivatePersons)
                 {
                     if (person.PrivatePersonID.Equals(participant.ParticipantID))
                     {
                         _participants.Add((person.FullName, person.PersonalID));
                     }
                 }
-                foreach(Company company in _context.Companies)
+                foreach (Company company in _context.Companies)
                 {
                     if (company.CompanyID.Equals(participant.ParticipantID))
                     {
@@ -79,7 +89,67 @@ namespace WebEventManager.Pages.Events
             }
             GetParticipants = _participants;
 
+            // ParticipantType = "PrivatePerson";
+
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (!ModelState.IsValid)
+            {
+                foreach (var value in ModelState.Values)
+                {
+                    if (value.Errors.Count > 0)
+                    {
+                        foreach (var error in value.Errors)
+                        {
+                            Console.WriteLine(error.ErrorMessage);
+                        }
+                    }
+                }
+                return Page();
+            }
+
+            //add participant
+            var selectedParticipantType = Request.Form["ParticipantType"].ToString();
+
+
+
+            if (selectedParticipantType == "PrivatePerson")
+            {
+                // Code for creating a private person object goes here
+                Participant participant = new Participant(NewPrivatePerson.FirstName, NewPrivatePerson.LastName, NewPrivatePerson.PersonalID);
+                _context.Participants.Add(participant);
+                await _context.SaveChangesAsync();
+                NewAttendance.ParticipantID = participant.ParticipantID;
+
+
+            }
+            else if (selectedParticipantType == "Company")
+            {
+                // Code for creating a company object goes here
+                Participant participant = new Participant(NewCompany.Name, NewCompany.RegistryNumber, NewCompany.NumberOfParticipants);
+                _context.Participants.Add(participant);
+                await _context.SaveChangesAsync();
+                NewAttendance.ParticipantID = participant.ParticipantID;
+
+            }
+
+
+            //add attendance
+            Attendance attendance = new Attendance
+            {
+                ParticipantID = NewAttendance.ParticipantID,
+                EventID = Event.EventID,
+                PaymentMethod = NewAttendance.PaymentMethod,
+                AdditionalInformation = NewAttendance.AdditionalInformation
+            };
+            _context.Attendances.Add(attendance);
+            await _context.SaveChangesAsync();
+
+            //todo reload the page with new data
+            return RedirectToPage("./Details", new { id = Event.EventID });
         }
     }
 }

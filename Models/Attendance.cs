@@ -3,7 +3,7 @@
 namespace WebEventManager.Models
 {
 
-    public enum PaymentMenthod
+    public enum PaymentMethod
     {
         CreditCard,
         Cash
@@ -14,7 +14,7 @@ namespace WebEventManager.Models
         public int AttendanceID { get; set; }
         public int ParticipantID { get; set; }
         public int EventID { get; set; }
-        public PaymentMenthod PaymentMenthod { get; set; }
+        public PaymentMethod PaymentMethod { get; set; }
         public string AdditionalInformation { get; set; }
 
         [ForeignKey("ParticipantID")]

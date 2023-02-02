@@ -41,14 +41,14 @@ namespace WebEventManager.Data
 
             var attendances = new Attendance[]
             {
-                new Attendance{ParticipantID=1, EventID=1, PaymentMenthod = PaymentMenthod.CreditCard, AdditionalInformation = "brings cake"},
-                new Attendance{ParticipantID=2, EventID=1, PaymentMenthod = PaymentMenthod.Cash, AdditionalInformation = "brings joy"},
-                new Attendance{ParticipantID=3, EventID=2, PaymentMenthod = PaymentMenthod.CreditCard, AdditionalInformation = "brings flowers"},
-                new Attendance{ParticipantID=4, EventID=2, PaymentMenthod = PaymentMenthod.Cash, AdditionalInformation = "brings fireworks"},
-                new Attendance{ParticipantID=5, EventID=3, PaymentMenthod = PaymentMenthod.CreditCard, AdditionalInformation = "brings fun"},
-                new Attendance{ParticipantID=6, EventID=3, PaymentMenthod = PaymentMenthod.Cash, AdditionalInformation = "brings happiness"},
-                new Attendance{ParticipantID=7, EventID=4, PaymentMenthod = PaymentMenthod.CreditCard, AdditionalInformation = "brings no errors"},
-                new Attendance{ParticipantID=8, EventID=4, PaymentMenthod = PaymentMenthod.Cash, AdditionalInformation = "brings jobs for everyone"},
+                new Attendance{ParticipantID=1, EventID=1, PaymentMethod = PaymentMethod.CreditCard, AdditionalInformation = "brings cake"},
+                new Attendance{ParticipantID=2, EventID=1, PaymentMethod = PaymentMethod.Cash, AdditionalInformation = "brings joy"},
+                new Attendance{ParticipantID=3, EventID=2, PaymentMethod = PaymentMethod.CreditCard, AdditionalInformation = "brings flowers"},
+                new Attendance{ParticipantID=4, EventID=2, PaymentMethod = PaymentMethod.Cash, AdditionalInformation = "brings fireworks"},
+                new Attendance{ParticipantID=5, EventID=3, PaymentMethod = PaymentMethod.CreditCard, AdditionalInformation = "brings fun"},
+                new Attendance{ParticipantID=6, EventID=3, PaymentMethod = PaymentMethod.Cash, AdditionalInformation = "brings happiness"},
+                new Attendance{ParticipantID=7, EventID=4, PaymentMethod = PaymentMethod.CreditCard, AdditionalInformation = "brings no errors"},
+                new Attendance{ParticipantID=8, EventID=4, PaymentMethod = PaymentMethod.Cash, AdditionalInformation = "brings jobs for everyone"},
 
             };
 

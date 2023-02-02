@@ -19,12 +19,10 @@ namespace WebEventManager.Models
 
         public Participant() { }
         public Participant(string firstName, string lastName, long personalID) {
-            Person = new PrivatePerson(firstName, lastName, personalID);
-            //PrivatePersonID = Person.PrivatePersonID;
+            Person = new PrivatePerson(firstName, lastName, personalID);    
         }
         public Participant(string companyName, int registryNumber, int numberOfParticipants) {
             Company = new Company(companyName, registryNumber, numberOfParticipants);
-            //CompanyID = Company.CompanyID;
         }
 
     }
