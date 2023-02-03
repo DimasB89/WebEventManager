@@ -1,0 +1,50 @@
+﻿@page
+@model WebEventManager.Pages.PrivatePeople.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>PrivatePerson</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PrivatePerson.PrivatePersonID" />
+            <div class="form-group">
+                <label asp-for="PrivatePerson.FirstName" class="control-label"></label>
+                <input asp-for="PrivatePerson.FirstName" class="form-control" />
+                <span asp-validation-for="PrivatePerson.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrivatePerson.LastName" class="control-label"></label>
+                <input asp-for="PrivatePerson.LastName" class="form-control" />
+                <span asp-validation-for="PrivatePerson.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrivatePerson.FullName" class="control-label"></label>
+                <input asp-for="PrivatePerson.FullName" class="form-control" />
+                <span asp-validation-for="PrivatePerson.FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrivatePerson.PersonalID" class="control-label"></label>
+                <input asp-for="PrivatePerson.PersonalID" class="form-control" />
+                <span asp-validation-for="PrivatePerson.PersonalID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

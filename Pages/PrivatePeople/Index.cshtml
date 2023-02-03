@@ -1,0 +1,60 @@
+﻿@page
+@model WebEventManager.Pages.PrivatePeople.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PrivatePerson[0].FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrivatePerson[0].LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrivatePerson[0].FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrivatePerson[0].PersonalID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrivatePerson[0].Participant)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.PrivatePerson) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PersonalID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Participant.ParticipantID)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.PrivatePersonID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.PrivatePersonID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.PrivatePersonID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

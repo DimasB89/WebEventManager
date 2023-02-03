@@ -14,13 +14,13 @@ namespace WebEventManager.Pages.Events
     {
         private readonly WebEventManager.Data.EMContext _context;
         //private List<Participant> _participants;
-        private List<(string name, long id)> _participants;
+        private List<(string name, long id, bool isPerson, int actualID)> _participants;
         //private int _currentEventID;
 
         public DetailsModel(WebEventManager.Data.EMContext context)
         {
             _context = context;
-            _participants = new List<(string name, long id)> { };
+            _participants = new List<(string name, long id, bool isPerson, int actualID)> { };
         }
 
         [BindProperty]
@@ -37,7 +37,7 @@ namespace WebEventManager.Pages.Events
         [BindProperty]
         public Attendance NewAttendance { get; set; } = default!;
 
-        public IEnumerable<(string name, long id)> GetParticipants { get; set; }
+        public IEnumerable<(string name, long id, bool isPerson, int actualID)> GetParticipants { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         //public IActionResult OnGet(int? id)
@@ -82,14 +82,14 @@ namespace WebEventManager.Pages.Events
                 {
                     if (person.PrivatePersonID.Equals(participant.ParticipantID))
                     {
-                        _participants.Add((person.FullName, person.PersonalID));
+                        _participants.Add((person.FullName, person.PersonalID, true, person.PrivatePersonID));
                     }
                 }
                 foreach (Company company in _context.Companies)
                 {
                     if (company.CompanyID.Equals(participant.ParticipantID))
                     {
-                        _participants.Add((company.Name, company.RegistryNumber));
+                        _participants.Add((company.Name, company.RegistryNumber, false, company.CompanyID));
                     }
                 }
             }

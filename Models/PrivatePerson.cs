@@ -24,6 +24,6 @@ namespace WebEventManager.Models
             PersonalID = personalID;
         }
 
-        public PrivatePerson() { }
+        public PrivatePerson() { } //todo add the personalid default value
     }
 }

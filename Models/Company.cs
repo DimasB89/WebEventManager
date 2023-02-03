@@ -20,6 +20,6 @@ namespace WebEventManager.Models
             NumberOfParticipants = numberOfParticipants;
         }
 
-        public Company() { }
+        public Company() { } //todo add the company int values a default value
     }
 }
