@@ -117,8 +117,8 @@ namespace WebEventManager.Pages.Events
             }
             else
             {
-                Console.WriteLine("PaymentMethod: " + NewAttendance.PaymentMethod);
-                Console.WriteLine("AdditionalInformation: " + NewAttendance.AdditionalInformation);
+                /*Console.WriteLine("PaymentMethod: " + NewAttendance.PaymentMethod);
+                Console.WriteLine("AdditionalInformation: " + NewAttendance.AdditionalInformation);*/
             }
 
             //Event Event = (Event)ViewData["Event"];

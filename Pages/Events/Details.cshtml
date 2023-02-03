@@ -110,6 +110,7 @@
                     <input asp-for="NewPrivatePerson.PersonalID" class="form-control" value="38505101234" />
                     <span asp-validation-for="NewPrivatePerson.PersonalID" class="text-danger"></span>
                 </div>
+                <input type="hidden" name="FullName" asp-for="NewPrivatePerson.FullName"/>
                 
             </div>
 
@@ -122,12 +123,12 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="NewCompany.RegistryNumber" class="control-label"></label>
-                    <input asp-for="NewCompany.RegistryNumber" class="form-control" />
+                    <input asp-for="NewCompany.RegistryNumber" class="form-control" value="00000000" />
                     <span asp-validation-for="NewCompany.RegistryNumber" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="NewCompany.NumberOfParticipants" class="control-label"></label>
-                    <input asp-for="NewCompany.NumberOfParticipants" class="form-control" />
+                    <input asp-for="NewCompany.NumberOfParticipants" class="form-control" value="0" />
                     <span asp-validation-for="NewCompany.NumberOfParticipants" class="text-danger"></span>
                 </div>
                 
@@ -145,7 +146,7 @@
                 <input asp-for="NewAttendance.AdditionalInformation" class="form-control" />
                 <span asp-validation-for="NewAttendance.AdditionalInformation" class="text-danger"></span>
             </div>
-            <input type="hidden" asp-for="Event" value="@Model.Event" />
+            <input type="hidden" name = "EventID" asp-for="Event.EventID" />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
