@@ -107,22 +107,10 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="NewPrivatePerson.PersonalID" class="control-label"></label>
-                    <input asp-for="NewPrivatePerson.PersonalID" class="form-control" />
+                    <input asp-for="NewPrivatePerson.PersonalID" class="form-control" value="38505101234" />
                     <span asp-validation-for="NewPrivatePerson.PersonalID" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="NewAttendance.PaymentMethod" class="control-label"></label>
-                    <select asp-for="NewAttendance.PaymentMethod" class="form-control">
-                        <option value="CreditCard">Credit Card</option>
-                        <option value="Cash">Cash</option>
-                    </select>
-                    <span asp-validation-for="NewAttendance.PaymentMethod" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="NewAttendance.AdditionalInformation" class="control-label"></label>
-                    <input asp-for="NewAttendance.AdditionalInformation" class="form-control" />
-                    <span asp-validation-for="NewAttendance.AdditionalInformation" class="text-danger"></span>
-                </div>
+                
             </div>
 
             <div id="companyFields" style="display:none;">
@@ -142,21 +130,22 @@
                     <input asp-for="NewCompany.NumberOfParticipants" class="form-control" />
                     <span asp-validation-for="NewCompany.NumberOfParticipants" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="NewAttendance.PaymentMethod" class="control-label"></label>
-                    <select asp-for="NewAttendance.PaymentMethod" class="form-control">
-                        <option value="CreditCard">Credit Card</option>
-                        <option value="Cash">Cash</option>
-                    </select>
-                    <span asp-validation-for="NewAttendance.PaymentMethod" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="NewAttendance.AdditionalInformation" class="control-label"></label>
-                    <input asp-for="NewAttendance.AdditionalInformation" class="form-control" />
-                    <span asp-validation-for="NewAttendance.AdditionalInformation" class="text-danger"></span>
-                </div>
+                
             </div>
-
+            <div class="form-group">
+                <label asp-for="NewAttendance.PaymentMethod" class="control-label"></label>
+                <select asp-for="NewAttendance.PaymentMethod" class="form-control">
+                    <option value="CreditCard">Credit Card</option>
+                    <option value="Cash">Cash</option>
+                </select>
+                <span asp-validation-for="NewAttendance.PaymentMethod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NewAttendance.AdditionalInformation" class="control-label"></label>
+                <input asp-for="NewAttendance.AdditionalInformation" class="form-control" />
+                <span asp-validation-for="NewAttendance.AdditionalInformation" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Event" value="@Model.Event" />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

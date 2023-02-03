@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebEventManager.Models
 {
@@ -11,6 +12,7 @@ namespace WebEventManager.Models
 
     public class Attendance
     {
+        [Key]
         public int AttendanceID { get; set; }
         public int ParticipantID { get; set; }
         public int EventID { get; set; }
@@ -22,5 +24,14 @@ namespace WebEventManager.Models
 
         [ForeignKey("EventID")]
         public Event Event { get; set; }
+
+        public Attendance() { }
+        public Attendance(int participantID, int eventID, PaymentMethod paymethod, string info)
+        {
+            ParticipantID = participantID;
+            EventID = eventID;
+            PaymentMethod = paymethod;
+            AdditionalInformation = info;
+        }
     }
 }
