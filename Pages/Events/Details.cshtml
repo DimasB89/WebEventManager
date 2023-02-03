@@ -67,14 +67,14 @@
                             <td>
                                 @if (item.isPerson)
                                 {
-                                    <a asp-page="../PrivatePeople/Edit" asp-route-id="@item.actualID">Vaata</a>
+                                    <a asp-page="../PrivatePeople/Edit" asp-route-id="@item.actualID">Vaata</a> 
+                                    <a asp-page="../PrivatePeople/Delete" asp-route-id="@item.actualID">Kustuta</a>
                                 }
                                 else
                                 {
                                     <a asp-page="../Companies/Edit" asp-route-id="@item.actualID">Vaata</a>
+                                    <a asp-page="../Companies/Delete" asp-route-id="@item.actualID">Kustuta</a>
                                 }
-                                @*<a asp-page="./Participants/Details" asp-route-id="@item.EventID">Osavytjad</a>
-                            <a asp-page="./Participants/Delete" asp-route-id="@item.EventID">Kustuta</a>*@
                             </td>
                         </tr>
                     }

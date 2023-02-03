@@ -52,8 +52,30 @@ namespace WebEventManager.Pages.Companies
 
             if (company != null)
             {
+                //added attendance removal code
+                foreach (Attendance a in _context.Attendances)
+                {
+                    if (a.ParticipantID == company.CompanyID)
+                    {
+                        _context.Attendances.Remove(a);
+                        break;
+                    }
+                }
+                //////////
                 Company = company;
                 _context.Companies.Remove(Company);
+
+                //find the table row in participat and remove it too
+                foreach(Participant p in _context.Participants)
+                {
+                    if(p.ParticipantID == company.CompanyID)
+                    {
+                        _context.Participants.Remove(p);
+                        break;
+                    }
+                }
+                /////////
+                
                 await _context.SaveChangesAsync();
             }
 

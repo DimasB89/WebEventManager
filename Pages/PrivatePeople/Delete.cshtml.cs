@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using WebEventManager.Data;
 using WebEventManager.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace WebEventManager.Pages.PrivatePeople
 {
@@ -52,8 +53,29 @@ namespace WebEventManager.Pages.PrivatePeople
 
             if (privateperson != null)
             {
+                foreach (Attendance a in _context.Attendances)
+                {
+                    if (a.ParticipantID == privateperson.PrivatePersonID)
+                    {
+                        _context.Attendances.Remove(a);
+                        break;
+                    }
+                }
+                //////////
                 PrivatePerson = privateperson;
                 _context.PrivatePersons.Remove(PrivatePerson);
+
+                //find the table row in participat and remove it too
+                foreach (Participant p in _context.Participants)
+                {
+                    if (p.ParticipantID == privateperson.PrivatePersonID)
+                    {
+                        _context.Participants.Remove(p);
+                        break;
+                    }
+                }
+                /////////
+                
                 await _context.SaveChangesAsync();
             }
 
