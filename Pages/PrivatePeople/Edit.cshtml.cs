@@ -23,6 +23,9 @@ namespace WebEventManager.Pages.PrivatePeople
         [BindProperty]
         public PrivatePerson PrivatePerson { get; set; } = default!;
 
+        [BindProperty]
+        public Attendance Attendance { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _context.PrivatePersons == null)
@@ -37,6 +40,16 @@ namespace WebEventManager.Pages.PrivatePeople
             }
             PrivatePerson = privateperson;
            ViewData["PrivatePersonID"] = new SelectList(_context.Participants, "ParticipantID", "ParticipantID");
+
+
+            var attendance = await _context.Attendances.FirstOrDefaultAsync(l => l.ParticipantID == id);
+            if (attendance == null)
+            {
+                return NotFound();
+            }
+            Attendance = attendance;
+            ViewData["AttendanceID"] = new SelectList(_context.Attendances, "AttendanceID", "AttendanceID");
+
             return Page();
         }
 
@@ -49,7 +62,10 @@ namespace WebEventManager.Pages.PrivatePeople
                 return Page();
             }
 
+            PrivatePerson.FullName = PrivatePerson.FirstName + " " + PrivatePerson.LastName;
+
             _context.Attach(PrivatePerson).State = EntityState.Modified;
+            _context.Attach(Attendance).State = EntityState.Modified;
 
             try
             {

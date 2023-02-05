@@ -23,6 +23,9 @@ namespace WebEventManager.Pages.Companies
         [BindProperty]
         public Company Company { get; set; } = default!;
 
+        [BindProperty]
+        public Attendance Attendance { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _context.Companies == null)
@@ -37,6 +40,14 @@ namespace WebEventManager.Pages.Companies
             }
             Company = company;
            ViewData["CompanyID"] = new SelectList(_context.Participants, "ParticipantID", "ParticipantID");
+
+            var attendance = await _context.Attendances.FirstOrDefaultAsync(l => l.ParticipantID == id);
+            if (attendance == null)
+            {
+                return NotFound();
+            }
+            Attendance = attendance;
+            ViewData["AttendanceID"] = new SelectList(_context.Attendances, "AttendanceID", "AttendanceID");
             return Page();
         }
 
@@ -50,6 +61,7 @@ namespace WebEventManager.Pages.Companies
             }
 
             _context.Attach(Company).State = EntityState.Modified;
+            _context.Attach(Attendance).State = EntityState.Modified;
 
             try
             {
@@ -67,7 +79,7 @@ namespace WebEventManager.Pages.Companies
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Index");//go back to event details page
         }
 
         private bool CompanyExists(int id)

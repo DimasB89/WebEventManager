@@ -14,6 +14,7 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="PrivatePerson.PrivatePersonID" />
+           
             <div class="form-group">
                 <label asp-for="PrivatePerson.FirstName" class="control-label"></label>
                 <input asp-for="PrivatePerson.FirstName" class="form-control" />
@@ -25,14 +26,25 @@
                 <span asp-validation-for="PrivatePerson.LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PrivatePerson.FullName" class="control-label"></label>
-                <input asp-for="PrivatePerson.FullName" class="form-control" />
-                <span asp-validation-for="PrivatePerson.FullName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="PrivatePerson.PersonalID" class="control-label"></label>
                 <input asp-for="PrivatePerson.PersonalID" class="form-control" />
                 <span asp-validation-for="PrivatePerson.PersonalID" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Attendance.AttendanceID" />
+            <input type="hidden" asp-for="Attendance.EventID" />
+            <input type="hidden" asp-for="Attendance.ParticipantID" />
+            <div class="form-group">
+                <label asp-for="Attendance.PaymentMethod" class="control-label"></label>
+                <select asp-for="Attendance.PaymentMethod" class="form-control">
+                    <option value="CreditCard">Credit Card</option>
+                    <option value="Cash">Cash</option>
+                </select>
+                <span asp-validation-for="Attendance.PaymentMethod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Attendance.AdditionalInformation" class="control-label"></label>
+                <input asp-for="Attendance.AdditionalInformation" class="form-control" />
+                <span asp-validation-for="Attendance.AdditionalInformation" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
