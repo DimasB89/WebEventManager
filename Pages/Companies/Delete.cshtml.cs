@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using WebEventManager.Data;
 using WebEventManager.Models;
 
@@ -49,6 +50,7 @@ namespace WebEventManager.Pages.Companies
                 return NotFound();
             }
             var company = await _context.Companies.FindAsync(id);
+            int eventID = 1;
 
             if (company != null)
             {
@@ -57,6 +59,7 @@ namespace WebEventManager.Pages.Companies
                 {
                     if (a.ParticipantID == company.CompanyID)
                     {
+                        eventID = a.EventID;
                         _context.Attendances.Remove(a);
                         break;
                     }
@@ -79,7 +82,8 @@ namespace WebEventManager.Pages.Companies
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            //return RedirectToPage("./Index");
+            return RedirectToPage("../Events/Details", new { id = eventID });
         }
     }
 }

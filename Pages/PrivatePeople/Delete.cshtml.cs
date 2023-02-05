@@ -50,13 +50,16 @@ namespace WebEventManager.Pages.PrivatePeople
                 return NotFound();
             }
             var privateperson = await _context.PrivatePersons.FindAsync(id);
+            int eventID = 1;
 
             if (privateperson != null)
             {
+                
                 foreach (Attendance a in _context.Attendances)
                 {
                     if (a.ParticipantID == privateperson.PrivatePersonID)
                     {
+                        eventID = a.EventID;
                         _context.Attendances.Remove(a);
                         break;
                     }
@@ -79,7 +82,8 @@ namespace WebEventManager.Pages.PrivatePeople
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            //return RedirectToPage("./Index");
+            return RedirectToPage("../Events/Details", new { id = eventID });
         }
     }
 }

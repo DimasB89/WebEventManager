@@ -13,9 +13,7 @@ namespace WebEventManager.Pages.Events
     public class DetailsModel : PageModel
     {
         private readonly WebEventManager.Data.EMContext _context;
-        //private List<Participant> _participants;
         private List<(string name, long id, bool isPerson, int actualID)> _participants;
-        //private int _currentEventID;
 
         public DetailsModel(WebEventManager.Data.EMContext context)
         {
@@ -26,8 +24,6 @@ namespace WebEventManager.Pages.Events
         [BindProperty]
         public Event Event { get; set; } = default!;
 
-        //[BindProperty]
-        //public Participant NewParticipant { get; set; }
         [BindProperty]
         public Company NewCompany { get; set; } = default!;
 
@@ -40,7 +36,6 @@ namespace WebEventManager.Pages.Events
         public IEnumerable<(string name, long id, bool isPerson, int actualID)> GetParticipants { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
-        //public IActionResult OnGet(int? id)
         {
             if (id == null || _context.Events == null)
             {
@@ -57,7 +52,6 @@ namespace WebEventManager.Pages.Events
                 Event = evento;
             }
 
-            //_currentEventID = Event.EventID;
 
             List<Participant> participants = new List<Participant>();
             
@@ -94,13 +88,17 @@ namespace WebEventManager.Pages.Events
                 }
             }
             GetParticipants = _participants;
-            //ViewData["Event"] = Event;
 
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
+            var selectedParticipantType = Request.Form["ParticipantType"].ToString();
+            if(selectedParticipantType == "Company")
+            {
+                ModelState.Remove("NewPrivatePerson.PersonalID");
+            }
             if (!ModelState.IsValid)
             {
                 foreach (var value in ModelState.Values)
@@ -115,38 +113,11 @@ namespace WebEventManager.Pages.Events
                 }
                 return Page();
             }
-            else
-            {
-                /*Console.WriteLine("PaymentMethod: " + NewAttendance.PaymentMethod);
-                Console.WriteLine("AdditionalInformation: " + NewAttendance.AdditionalInformation);*/
-            }
-
-            //Event Event = (Event)ViewData["Event"];
-
-            /*_context.Attach(Event).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!EventExists(Event.EventID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }*/
-
-
+            
 
             //add participant
-            var selectedParticipantType = Request.Form["ParticipantType"].ToString();
+            //var selectedParticipantType = Request.Form["ParticipantType"].ToString();
 
-            //Attendance attendance = new Attendance();
 
             if (selectedParticipantType == "PrivatePerson")
             {
@@ -155,33 +126,19 @@ namespace WebEventManager.Pages.Events
                 _context.Participants.Add(participant);
                 await _context.SaveChangesAsync();
                 NewAttendance.ParticipantID = participant.ParticipantID;
-                //attendance.PaymentMethod = NewAttendance.PaymentMethod;
-                //attendance.AdditionalInformation = NewAttendance.AdditionalInformation;
-
             }
             else if (selectedParticipantType == "Company")
             {
+                NewPrivatePerson.PrivatePersonID = 0;
                 // Code for creating a company object goes here
                 Participant participant = new Participant(NewCompany.Name, NewCompany.RegistryNumber, NewCompany.NumberOfParticipants);
                 _context.Participants.Add(participant);
                 await _context.SaveChangesAsync();
                 NewAttendance.ParticipantID = participant.ParticipantID;
-               // attendance.PaymentMethod = NewAttendance.PaymentMethod;
-                //attendance.AdditionalInformation = NewAttendance.AdditionalInformation;
             }
 
-
-            //add attendance
-           /* Attendance attendance = new Attendance
-            {
-                ParticipantID = NewAttendance.ParticipantID,
-                EventID = Event.EventID,
-                PaymentMethod = NewAttendance.PaymentMethod,
-                AdditionalInformation = NewAttendance.AdditionalInformation
-            };*/
             Attendance attendance = new Attendance(NewAttendance.ParticipantID, Event.EventID, NewAttendance.PaymentMethod, NewAttendance.AdditionalInformation);
-            /*attendance.ParticipantID = NewAttendance.ParticipantID;
-            attendance.EventID = Event.EventID;*/
+            
             _context.Attendances.Add(attendance);
             await _context.SaveChangesAsync();
 
@@ -189,9 +146,5 @@ namespace WebEventManager.Pages.Events
             return RedirectToPage("./Details", new { id = Event.EventID });
         }
 
-        private bool EventExists(int id)
-        {
-            return _context.Events.Any(e => e.EventID == id);
-        }
     }
 }
