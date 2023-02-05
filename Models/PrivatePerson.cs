@@ -12,6 +12,7 @@ namespace WebEventManager.Models
         public string FullName { get; set; }
 
         [RegularExpression(@"^[1-6]{1}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])[0-9]{4}$", ErrorMessage = "Invalid ID")]
+        [Utilities.EestiID]
         public long PersonalID { get; set; }
 
         public virtual Participant Participant { get; set; }
