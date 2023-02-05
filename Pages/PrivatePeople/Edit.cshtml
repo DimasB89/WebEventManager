@@ -5,9 +5,9 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Osavytja Info</h1>
 
-<h4>PrivatePerson</h4>
+<h4>Osavytja Info</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -47,14 +47,14 @@
                 <span asp-validation-for="Attendance.AdditionalInformation" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Salvesta" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="../Events/Details" asp-route-id="@Model.Attendance.EventID">Tagasi</a>
 </div>
 
 @section Scripts {

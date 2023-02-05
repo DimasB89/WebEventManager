@@ -83,7 +83,8 @@ namespace WebEventManager.Pages.PrivatePeople
                 }
             }
 
-            return RedirectToPage("./Index");
+            //return RedirectToPage("./Index");
+            return RedirectToPage("../Events/Details", new { id = Attendance.EventID });
         }
 
         private bool PrivatePersonExists(int id)
