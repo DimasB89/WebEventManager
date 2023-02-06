@@ -96,25 +96,16 @@ namespace WebEventManager.Pages.Events
         {
             var selectedParticipantType = Request.Form["ParticipantType"].ToString();
 
-            //skip validation of unused forms
-            if(selectedParticipantType == "Company")
+            var fieldsToSkip = selectedParticipantType == "Company"
+                ? new List<string> { "NewPrivatePerson.PersonalID", "NewPrivatePerson.FirstName", "NewPrivatePerson.LastName" }
+                : new List<string> { "NewCompany.Name", "NewCompany.RegistryNumber", "NewCompany.NumberOfParticipants" };
+
+            foreach (var field in fieldsToSkip)
             {
-                ModelState.ClearValidationState("NewPrivatePerson.PersonalID");
-                ModelState.MarkFieldValid("NewPrivatePerson.PersonalID");
-                ModelState.ClearValidationState("NewPrivatePerson.FirstName");
-                ModelState.MarkFieldValid("NewPrivatePerson.FirstName");
-                ModelState.ClearValidationState("NewPrivatePerson.LastName");
-                ModelState.MarkFieldValid("NewPrivatePerson.LastName");
+                ModelState.ClearValidationState(field);
+                ModelState.MarkFieldValid(field);
             }
-            else
-            {
-                ModelState.ClearValidationState("NewCompany.Name");
-                ModelState.MarkFieldValid("NewCompany.Name");
-                ModelState.ClearValidationState("NewCompany.RegistryNumber");
-                ModelState.MarkFieldValid("NewCompany.RegistryNumber");
-                ModelState.ClearValidationState("NewCompany.NumberOfParticipants");
-                ModelState.MarkFieldValid("NewCompany.NumberOfParticipants");
-            }
+
 
             if (!ModelState.IsValid)
             {
@@ -132,29 +123,24 @@ namespace WebEventManager.Pages.Events
                 }
                 return Page();
             }
-            
+
 
             //add participant
+            Participant participant = new Participant();
             if (selectedParticipantType == "PrivatePerson")
             {
-                // Code for creating a private person object goes here
-                Participant participant = new Participant(NewPrivatePerson.FirstName, NewPrivatePerson.LastName, NewPrivatePerson.PersonalID);
-                _context.Participants.Add(participant);
-                await _context.SaveChangesAsync();
-                NewAttendance.ParticipantID = participant.ParticipantID;
+                participant = new Participant(NewPrivatePerson.FirstName, NewPrivatePerson.LastName, NewPrivatePerson.PersonalID);
             }
             else if (selectedParticipantType == "Company")
             {
-                //NewPrivatePerson.PrivatePersonID = 0;
-                // Code for creating a company object goes here
-                Participant participant = new Participant(NewCompany.Name, NewCompany.RegistryNumber, NewCompany.NumberOfParticipants);
-                _context.Participants.Add(participant);
-                await _context.SaveChangesAsync();
-                NewAttendance.ParticipantID = participant.ParticipantID;
+                participant = new Participant(NewCompany.Name, NewCompany.RegistryNumber, NewCompany.NumberOfParticipants);
             }
+            _context.Participants.Add(participant);
+            await _context.SaveChangesAsync();
 
+            //add attendance
+            NewAttendance.ParticipantID = participant.ParticipantID;
             Attendance attendance = new Attendance(NewAttendance.ParticipantID, Event.EventID, NewAttendance.PaymentMethod, NewAttendance.AdditionalInformation);
-            
             _context.Attendances.Add(attendance);
             await _context.SaveChangesAsync();
 

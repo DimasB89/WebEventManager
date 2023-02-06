@@ -57,7 +57,7 @@ namespace WebEventManager.Pages.Events
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("../Index");
         }
     }
 }
