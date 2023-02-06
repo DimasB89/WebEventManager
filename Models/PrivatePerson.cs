@@ -7,7 +7,13 @@ namespace WebEventManager.Models
     {
         [ForeignKey("Participant")]
         public int PrivatePersonID { get; set; }
+        [Required]
+        [MinLength(3, ErrorMessage = "vähemalt 3 tähemärki")]
+        [MaxLength(15, ErrorMessage = "maksimaalselt 15 tähemärki")]
         public string FirstName { get; set; }
+        [Required]
+        [MinLength(3, ErrorMessage = "vähemalt 3 tähemärki")]
+        [MaxLength(15, ErrorMessage = "maksimaalselt 15 tähemärki")]
         public string LastName { get; set; }
         public string FullName { get; set; }
 

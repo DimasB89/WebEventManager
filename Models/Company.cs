@@ -7,8 +7,14 @@ namespace WebEventManager.Models
     {
         [ForeignKey("Participant")]
         public int CompanyID { get; set; }
+        [Required]
+        [MinLength(3, ErrorMessage = "vähemalt 3 tähemärki")]
         public string Name { get; set; }
+        [Required]
+        [Utilities.MaxLengthInt(8, ErrorMessage = "maksimaalselt 8 numbrit")]
         public int RegistryNumber { get; set; }
+        [Required]
+        [Range(1,100000, ErrorMessage = "vähemalt 1, maksimaalselt 100 000")]
         public int NumberOfParticipants { get; set; }
 
         public virtual Participant Participant { get; set; }

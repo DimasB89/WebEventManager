@@ -10,8 +10,20 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
+            var selectedType = localStorage.getItem('selectedType') || 'PrivatePerson';
+            if (selectedType !== "Company") {
+                $("input[name='ParticipantType'][value='PrivatePerson']").prop('checked', true).change();
+                $("#companyFields").hide();
+                $("#privatePersonFields").show();
+            } else {
+                $("input[name='ParticipantType'][value='Company']").prop('checked', true).change();
+                $("#privatePersonFields").hide();
+                $("#companyFields").show();
+            }
+
             $("input[name='ParticipantType']").change(function () {
                 var selectedType = $("input[name='ParticipantType']:checked").val();
+                localStorage.setItem('selectedType', selectedType);
                 if (selectedType === "PrivatePerson") {
                     $("#privatePersonFields").show();
                     $("#companyFields").hide();
@@ -20,6 +32,7 @@
                     $("#companyFields").show();
                 }
             });
+
         });
     </script>
 </head>
@@ -55,28 +68,31 @@
         <dd class="col-sm-10">
             <table class="table">
                 <tbody>
-                    @foreach (var item in Model.GetParticipants)
+                    @if (Model.GetParticipants?.Any() == true)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.id)
-                            </td>
-                            <td>
-                                @if (item.isPerson)
-                                {
-                                    <a asp-page="../PrivatePeople/Edit" asp-route-id="@item.actualID">Vaata</a> 
-                                    <a asp-page="../PrivatePeople/Delete" asp-route-id="@item.actualID">Kustuta</a>
-                                }
-                                else
-                                {
-                                    <a asp-page="../Companies/Edit" asp-route-id="@item.actualID">Vaata</a>
-                                    <a asp-page="../Companies/Delete" asp-route-id="@item.actualID">Kustuta</a>
-                                }
-                            </td>
-                        </tr>
+                        @foreach (var item in Model.GetParticipants)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.id)
+                                </td>
+                                <td>
+                                    @if (item.isPerson)
+                                    {
+                                        <a asp-page="../PrivatePeople/Edit" asp-route-id="@item.actualID">Vaata</a>
+                                        <a asp-page="../PrivatePeople/Delete" asp-route-id="@item.actualID">Kustuta</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-page="../Companies/Edit" asp-route-id="@item.actualID">Vaata</a>
+                                        <a asp-page="../Companies/Delete" asp-route-id="@item.actualID">Kustuta</a>
+                                    }
+                                </td>
+                            </tr>
+                        }
                     }
                 </tbody>
             </table>
@@ -92,7 +108,7 @@
             <div class="form-group">
                 <label for="participantType">Participant Type:</label>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="ParticipantType" id="privatePersonRadio" value="PrivatePerson"><!-- checked="checked" -->
+                    <input class="form-check-input" type="radio" name="ParticipantType" id="privatePersonRadio" value="PrivatePerson">
                     <label class="form-check-label" for="privatePersonRadio">Private Person</label>
                 </div>
                 <div class="form-check form-check-inline">
@@ -100,6 +116,8 @@
                     <label class="form-check-label" for="companyRadio">Company</label>
                 </div>
             </div>
+            <input type="hidden" id="selectedType" name="selectedType" value="PrivatePerson">
+
 
             <div id="privatePersonFields" style="display:none;">
                 <!-- Private Person form inputs go here -->
@@ -113,10 +131,13 @@
                     <input asp-for="NewPrivatePerson.LastName" class="form-control" />
                     <span asp-validation-for="NewPrivatePerson.LastName" class="text-danger"></span>
                 </div>
+                
                 <div class="form-group">
                     <label asp-for="NewPrivatePerson.PersonalID" class="control-label"></label>
-                    <input asp-for="NewPrivatePerson.PersonalID" class="form-control" value="38505101234" />
-                    <span asp-validation-for="NewPrivatePerson.PersonalID" class="text-danger"></span>
+                    <input asp-for="NewPrivatePerson.PersonalID" class="form-control" /> @*value="38505101234"*@
+                    <span asp-validation-for="NewPrivatePerson.PersonalID" class="text-danger">
+                        
+                    </span>
                 </div>
                 <input type="hidden" name="FullName" asp-for="NewPrivatePerson.FullName"/>
                 
@@ -155,6 +176,8 @@
                 <span asp-validation-for="NewAttendance.AdditionalInformation" class="text-danger"></span>
             </div>
             <input type="hidden" name = "EventID" asp-for="Event.EventID" />
+            <input type="hidden" name="Name" asp-for="Event.Name" />
+            <input type="hidden" name="Place" asp-for="Event.Place" />
             <div class="form-group">
                 <input type="submit" value="Salvesta" class="btn btn-primary" />
             </div>

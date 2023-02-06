@@ -9,8 +9,6 @@ namespace WebEventManager.Models
     {
         [Key] 
         public int ParticipantID { get; set; }
-        //public int PrivatePersonID { get; set; }
-        //public int CompanyID { get; set; }
         
         public ICollection<Attendance> Attendances { get; set; }
 

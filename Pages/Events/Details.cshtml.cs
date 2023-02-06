@@ -95,12 +95,31 @@ namespace WebEventManager.Pages.Events
         public async Task<IActionResult> OnPostAsync()
         {
             var selectedParticipantType = Request.Form["ParticipantType"].ToString();
+
+            //skip validation of unused forms
             if(selectedParticipantType == "Company")
             {
-                ModelState.Remove("NewPrivatePerson.PersonalID");
+                ModelState.ClearValidationState("NewPrivatePerson.PersonalID");
+                ModelState.MarkFieldValid("NewPrivatePerson.PersonalID");
+                ModelState.ClearValidationState("NewPrivatePerson.FirstName");
+                ModelState.MarkFieldValid("NewPrivatePerson.FirstName");
+                ModelState.ClearValidationState("NewPrivatePerson.LastName");
+                ModelState.MarkFieldValid("NewPrivatePerson.LastName");
             }
+            else
+            {
+                ModelState.ClearValidationState("NewCompany.Name");
+                ModelState.MarkFieldValid("NewCompany.Name");
+                ModelState.ClearValidationState("NewCompany.RegistryNumber");
+                ModelState.MarkFieldValid("NewCompany.RegistryNumber");
+                ModelState.ClearValidationState("NewCompany.NumberOfParticipants");
+                ModelState.MarkFieldValid("NewCompany.NumberOfParticipants");
+            }
+
             if (!ModelState.IsValid)
             {
+                ModelState.AddModelError("NewPrivatePerson.PersonalID", "Vale ID");
+
                 foreach (var value in ModelState.Values)
                 {
                     if (value.Errors.Count > 0)
@@ -116,9 +135,6 @@ namespace WebEventManager.Pages.Events
             
 
             //add participant
-            //var selectedParticipantType = Request.Form["ParticipantType"].ToString();
-
-
             if (selectedParticipantType == "PrivatePerson")
             {
                 // Code for creating a private person object goes here
@@ -129,7 +145,7 @@ namespace WebEventManager.Pages.Events
             }
             else if (selectedParticipantType == "Company")
             {
-                NewPrivatePerson.PrivatePersonID = 0;
+                //NewPrivatePerson.PrivatePersonID = 0;
                 // Code for creating a company object goes here
                 Participant participant = new Participant(NewCompany.Name, NewCompany.RegistryNumber, NewCompany.NumberOfParticipants);
                 _context.Participants.Add(participant);
@@ -142,7 +158,6 @@ namespace WebEventManager.Pages.Events
             _context.Attendances.Add(attendance);
             await _context.SaveChangesAsync();
 
-            //todo reload the page with new data
             return RedirectToPage("./Details", new { id = Event.EventID });
         }
 

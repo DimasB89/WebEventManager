@@ -16,9 +16,16 @@ namespace WebEventManager
                 {
                     return ValidationResult.Success;
                 }
+
                 string personalID = value.ToString();
 
-                    int sum = 0;
+                if (personalID.Length < 11)
+                {
+                    //ErrorMessage = "Vale ID";
+                    return new ValidationResult("Vale ID");
+                }
+
+                int sum = 0;
                     int[] weights = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 1 };
                     int checkDigit = int.Parse(personalID[10].ToString());
 
@@ -55,6 +62,22 @@ namespace WebEventManager
                     }
                 
                 
+            }
+        }
+
+        public class MaxLengthInt : ValidationAttribute
+        {
+            private readonly int _maxLength;
+
+            public MaxLengthInt(int maxLength)
+            {
+                _maxLength = maxLength;
+            }
+
+            public override bool IsValid(object value)
+            {
+                int length = value.ToString().Length;
+                return length <= _maxLength;
             }
         }
     }
