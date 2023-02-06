@@ -18,20 +18,16 @@
         <div class="row no-gutters border mb-4">
             <div class="col p-4 d-flex flex-column position-static">
                 <p class="card-text mb-auto">
-                    here is going to be an image later
-                </p>
-                <p>
-                    @*                    <a href="https://docs.microsoft.com/aspnet/core/data/ef-rp/intro" class="stretched-link">See the tutorial</a>
-                    *@
+                    <img src="~/images/pilt.jpg" />
                 </p>
             </div>
         </div>
     </div>
 
 </div>
-<div class="row mb-auto">
+<div class="row mb-auto" >
     <div class="col-md-4">
-        <h3>Upcoming Events</h3>
+        <h3>Tulevased üritused</h3>
         <table class="table">
             <tbody>
                 @foreach (var item in Model.GetUpcomingEvents)
@@ -44,22 +40,24 @@
                             @Html.DisplayFor(modelItem => item.DateTime)
                         </td>
                         <td>
-                            <a asp-page="./Events/Details" asp-route-id="@item.EventID">Osavytjad</a>
-                            <a asp-page="./Events/Delete" asp-route-id="@item.EventID" class="btn">
-                                <img src="~/images/remove.svg" />
-                            </a>
+                            <div style="height: 25px; display:inline-block;">
+                                <a asp-page="./Events/Details" asp-route-id="@item.EventID" style="float:left;">Osavõtjad</a>
+                                <a asp-page="./Events/Delete" asp-route-id="@item.EventID" class="btn" style="float:right;">
+                                    <img src="~/images/remove.svg" height="15px" width="15px" />
+                                </a>
+                            </div>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
         <p>
-            <a asp-page="./Events/Create">Lisa Yritus</a>
+            <a asp-page="./Events/Create">Lisa Üritus</a>
         </p>
     </div>
 
     <div class="col-md-4">
-        <h3>Past Events</h3>
+        <h3>Toimunud üritused</h3>
         <table class="table">
             <tbody>
                 @foreach (var item in Model.GetPastEvents)
@@ -72,7 +70,9 @@
                             @Html.DisplayFor(modelItem => item.DateTime)
                         </td>
                         <td>
-                            <a asp-page="./Events/Details" asp-route-id="@item.EventID">Osavytjad</a>
+                            <div style="height: 25px; width: 25px;">
+                                <a asp-page="./Events/Details" asp-route-id="@item.EventID">Osavõtjad</a>
+                            </div>
                         </td>
                     </tr>
                 }
