@@ -17,6 +17,8 @@ namespace WebEventManager.Models
         public int ParticipantID { get; set; }
         public int EventID { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
+
+        [MaxLength(5000, ErrorMessage = "maksimaalselt 5000 tähemärki")]
         public string AdditionalInformation { get; set; }
 
         [ForeignKey("ParticipantID")]

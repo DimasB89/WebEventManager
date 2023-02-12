@@ -7,109 +7,100 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebEventManager.styles.css" asp-append-version="true" />
+    
+    <script>
+        window.onload = function () {
+            var currentPage = window.location.pathname;
+            var links = [
+                { id: "navLink1", href: "/" },
+                { id: "navLink2", href: "/Events/Create" }
+            ];
+
+            links.forEach(function (link) {
+                var linkElement = document.getElementById(link.id);
+                if (currentPage === link.href) {
+                    linkElement.style.backgroundColor = "#1f59a0";
+                    linkElement.style.color = "white";
+                }
+            });
+        }
+    </script>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index"></a>
-                <img src="images/logo.svg" alt="" />
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+    <div class="container">
+    <header style="margin-top: 10px;margin-bottom: 30px;height: 84px;">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
+            <div class="container" >
+                <a class="navbar-brand d-flex align-items-center" href="#">
+                    <img src="~/images/logo.svg" alt="" />
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between" style="height: 84px;">
+                    <ul class="navbar-nav flex-grow-1" >
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Avaleht</a>
+                            <a class="nav-link " asp-area="" asp-page="/Index" id="navLink1" style="height: 84px;padding-top: 29px;text-align: center;font-size: 17px;width: 107px;">AVALEHT</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Events/Create">Ürituse lisamine</a>
+                            <a class="nav-link " asp-area="" asp-page="/Events/Create" id="navLink2" style="height: 84px;padding-top: 29px;text-align: center;font-size: 17px;width: 168px;">ÜRITUSE LISAMINE</a>
                         </li>
                     </ul>
                 </div>
-                <img src="images/symbol.svg" alt="" />
+                <img class="symbol-img" src="~/images/symbol.svg" alt="" />
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+
+    <div class="container" style="width: 100%">
+        <main role="main" class="pb-3" style="width:100%">
             @RenderBody()
         </main>
     </div>
     
-    <footer class="bg-light text-center text-lg-start">
-        <!-- Grid container -->
-        <div class="container p-4">
-            <!--Grid row-->
-            <div class="row">
-                <!--Grid column-->
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-uppercase">Links</h5>
-
-                    <ul class="list-unstyled mb-0">
-                        <li>
-                            <a href="#!" class="text-dark">Link 1</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-dark">Link 2</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-dark">Link 3</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-dark">Link 4</a>
-                        </li>
-                    </ul>
-                </div>
-                <!--Grid column-->
-                <!--Grid column-->
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-uppercase mb-0">Links2</h5>
-
+    <footer class="custom-footer-color" style="margin-bottom: 10px;">
+        <div class="container py-4 py-lg-5">
+            <div class="row justify-content-center">
+                <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column">
+                    <h3 class="fs-4 text-white">Curabitur</h3>
                     <ul class="list-unstyled">
-                        <li>
-                            <a href="#!" class="text-dark">Link 1</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-dark">Link 2</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-dark">Link 3</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-dark">Link 4</a>
-                        </li>
+                        <li style="font-size: 13px;"><a class="link-custom" href="#">Emauris</a></li>
+                        <li style="font-size: 13px;"><a class="link-custom" href="#">Kfringilla</a></li>
+                        <li style="font-size: 13px;"><a class="link-custom" href="#">Oin magna sem</a></li>
+                        <li style="font-size: 13px;"><a class="link-custom" href="#">Kelementum</a></li>
                     </ul>
                 </div>
-                <!--Grid column-->
-                <!--Grid column-->
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-uppercase">Text1</h5>
-
-                    <p>Rida1</p>
-                    <p>Rida1</p>
-                    <p>Rida1</p>
-                    <p>Rida1</p>
+                <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column">
+                    <h3 class="fs-4 text-white">Fusce</h3>
+                    <ul class="list-unstyled">
+                        <li style="font-size: 13px;"><a class="link-custom" href="#">Econsectetur</a></li>
+                        <li style="font-size: 13px;"><a class="link-custom" href="#">Ksollicitudin</a></li>
+                        <li style="font-size: 13px;"><a class="link-custom" href="#">Omvullputate</a></li>
+                        <li style="font-size: 13px;"><a class="link-custom" href="#">Nunc fringilla tellu</a></li>
+                    </ul>
                 </div>
-                <!--Grid column-->
-                <!--Grid column-->
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-uppercase fw-bold mb-4">Contact</h5>
-                    <p><i class="fas fa-home me-3 text-secondary"></i> New York, NY 10012, US</p>
-                    <p>
-                        <i class="fas fa-envelope me-3 text-secondary"></i>
-                        info@example.com
-                    </p>
-                    <p><i class="fas fa-phone me-3 text-secondary"></i> + 01 234 567 88</p>
-                    <p><i class="fas fa-print me-3 text-secondary"></i> + 01 234 567 89</p>
+                <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column">
+                    <h3 class="fs-4 text-white">Kontakt</h3>
+                    <ul class="list-unstyled">
+                        <li style="font-size: 13px;font-weight: bold;">Peakontor: Tallinnas</li>
+                        <li style="font-size: 13px;">Vaike-Ameerika 1, 11415 Tallinn</li>
+                        <li style="font-size: 13px;">Telefon: 605 4450</li>
+                        <li style="font-size: 13px;">Faks: 605 3186</li>
+                    </ul>
                 </div>
-                <!--Grid column-->
+                <div class="col-lg-3 text-center text-lg-start d-flex flex-column align-items-center order-first align-items-lg-start order-lg-last">
+                    <h3 class="fs-4 text-white"><span class="invisible">Text</span></h3>
+                    <ul class="list-unstyled">
+                        <li style="font-size: 13px;font-weight: bold;">Harukontor: Vyrus</li>
+                        <li style="font-size: 13px;">Oja tn 7 (kylastusaadress)</li>
+                        <li style="font-size: 13px;">Telefon: 605 3330</li>
+                        <li style="font-size: 13px;">Faks: 605 3155</li>
+                    </ul>
+                </div>
             </div>
-            <!--Grid row-->
         </div>
-        <!-- Grid container -->
     </footer>
+    </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

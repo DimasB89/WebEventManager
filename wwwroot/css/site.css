@@ -18,5 +18,71 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #eef2f5;
+}
+
+.symbol-img {
+    display: block;
+}
+
+@media (max-width: 575px) {
+    .symbol-img {
+        display: none;
+    }
+}
+
+.custom-footer-color {
+    background-color: #373737;
+    color: #ecebec;
+}
+
+li a.link-custom {
+    text-decoration: none;
+    color: #ecebec;
+    
+}
+
+a.link-custom2 {
+    text-decoration: none;
+    color: dimgrey;
+    font-weight: bold;
+}
+
+h3.customHeading {
+    background-color: #1f59a0;
+    color: #ecebec;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    font-size: large;
+}
+
+@media (max-width: 576px) {
+    .row .col-6 {
+        width: 100%;
+    }
+}
+
+.row .col-6-custom {
+    width: calc(50% - 15px);
+    margin-left: 15px;
+}
+
+@media (max-width: 576px) {
+    .row .col-6-custom {
+        width: 100%;
+        margin-left: 0px;
+        margin-top: 15px;
+    }
+}
+
+form.form-group-custom{
+    width: 60%;
+}
+
+@media (max-width: 991px) {
+    form.form-group-custom {
+        width: 100%;
+    }
 }

@@ -5,42 +5,37 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<div class="row" style="display: flex; align-items:stretch; background-color: white; margin-top: 20px;">
+    <div style="display: flex;justify-content: space-between;overflow: hidden;height: 90px; padding:0;">
+        <h1 class="d-flex justify-content-center align-items-center" style="padding: 10px;width: 25%;background-color: #1f59a0;color: rgb(255,255,255);height: 100%;">Kustuta</h1>
+        <div style="width: 75%;height: auto;margin: 0;"><img src="~/images/libled.jpg" style="width: 100%;height: auto;object-fit: cover;"></div>
+    </div>
+    <h3 style="color: #1f59a0; padding:10px;">Kas oled kindel et tahad seda kustutada?</h3>
+    <div>
+        <hr />
+        <dl class="row">
+        <dt class="col-sm-2">
+            Juriidiline nimi:
+        </dt>
+        <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Company.Name)
+        </dd>
+        <dt class="col-sm-2">
+            Registrikood:
+        </dt>
+        <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Company.RegistryNumber)
+        </dd>
+        </dl>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Company</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Company.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Company.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Company.RegistryNumber)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Company.RegistryNumber)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Company.NumberOfParticipants)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Company.NumberOfParticipants)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Company.Participant)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Company.Participant.ParticipantID)
-        </dd>
-    </dl>
-    
-    <form method="post">
+        <form method="post">
         <input type="hidden" asp-for="Company.CompanyID" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
-    </form>
+            <div class="col" style="display:flex; padding-bottom: 15px;">
+            <a asp-page="../Index" class="btn btn-secondary" style="margin-right: 10px;">Tagasi</a> <input type="submit" value="Kustuta" class="btn btn-danger" />
+        </div>
+        </form>
+    </div>
 </div>
+
+
+

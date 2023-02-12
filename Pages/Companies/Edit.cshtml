@@ -5,56 +5,73 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Osavytja Info</h1>
 
-<h4>Osavytja Info</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Company.CompanyID" />
-           
-            <div class="form-group">
-                <label asp-for="Company.Name" class="control-label"></label>
-                <input asp-for="Company.Name" class="form-control" />
-                <span asp-validation-for="Company.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Company.RegistryNumber" class="control-label"></label>
-                <input asp-for="Company.RegistryNumber" class="form-control" />
-                <span asp-validation-for="Company.RegistryNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Company.NumberOfParticipants" class="control-label"></label>
-                <input asp-for="Company.NumberOfParticipants" class="form-control" />
-                <span asp-validation-for="Company.NumberOfParticipants" class="text-danger"></span>
-            </div>
-            <input type="hidden" asp-for="Attendance.AttendanceID" />
-            <input type="hidden" asp-for="Attendance.EventID" id="EventID" />
-            <input type="hidden" asp-for="Attendance.ParticipantID" />
-            <div class="form-group">
-                <label asp-for="Attendance.PaymentMethod" class="control-label"></label>
-                <select asp-for="Attendance.PaymentMethod" class="form-control">
-                    <option value="CreditCard">Credit Card</option>
-                    <option value="Cash">Cash</option>
-                </select>
-                <span asp-validation-for="Attendance.PaymentMethod" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Attendance.AdditionalInformation" class="control-label"></label>
-                <input asp-for="Attendance.AdditionalInformation" class="form-control" />
-                <span asp-validation-for="Attendance.AdditionalInformation" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Salvesta" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="row" style="display: flex; align-items:stretch; background-color: white; margin-top: 20px;">
+    <div style="display: flex;justify-content: space-between;overflow: hidden;height: 90px; padding:0;">
+        <h1 class="d-flex justify-content-center align-items-center" style="padding: 10px;width: 25%;background-color: #1f59a0;color: rgb(255,255,255);height: 100%;">Osavõtja info</h1>
+        <div style="width: 75%;height: auto;margin: 0;"><img src="~/images/libled.jpg" style="width: 100%;height: auto;object-fit: cover;"></div>
     </div>
-</div>
+    <div class="d-flex justify-content-center" id="BIG-DIV">
+        <div class="d-flex flex-column align-items-start" id="Header-and-input-fields" style="width: 450px;">
+            <div class="row" id="header" style="width: 100%;margin-top: 25px;margin-right: 0;margin-left: 0;margin-bottom: 25px;">
+                <div class="col">
+                    <h4 style="color: #1f59a0">Ettevõtte info</h4>
+                </div>
+            </div>
 
-<div>
-    <a asp-page="../Events/Details" asp-route-id="@Model.Attendance.EventID">Tagasi</a>
+            <form method="post" style="width: 100%;">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Company.CompanyID" />
+                <div class="row" style="width: 100%;margin-right: 0;margin-left: 0;margin-top: 5px;">
+                    <div class="col" style="display:flex">
+                        <label asp-for="Company.Name" class="control-label" style="width: 30%;">Juriidiline nimi:</label>
+                        <input asp-for="Company.Name" class="form-control" style="width: 70%;" />
+                    </div>
+                    <span asp-validation-for="Company.Name" class="text-danger"></span>
+                </div>
+                <div class="row" style="width: 100%;margin-right: 0;margin-left: 0;margin-top: 5px;">
+                    <div class="col" style="display:flex">
+                        <label asp-for="Company.RegistryNumber" class="control-label" style="width: 30%;">Registrikood:</label>
+                        <input asp-for="Company.RegistryNumber" class="form-control" style="width: 70%;" />
+                    </div>
+                    <span asp-validation-for="Company.RegistryNumber" class="text-danger"></span>
+                </div>
+                <div class="row" style="width: 100%;margin-right: 0;margin-left: 0;margin-top: 5px;">
+                    <div class="col" style="display:flex">
+                        <label asp-for="Company.NumberOfParticipants" class="control-label" style="width: 30%;">Osavõtjate arv:</label>
+                        <input asp-for="Company.NumberOfParticipants" class="form-control" style="width: 70%;" />
+                    </div>
+                    <span asp-validation-for="Company.NumberOfParticipants" class="text-danger"></span>
+                </div>
+                <input type="hidden" asp-for="Attendance.AttendanceID" />
+                <input type="hidden" asp-for="Attendance.EventID" id="EventID" />
+                <input type="hidden" asp-for="Attendance.ParticipantID" />
+                <div class="row" style="width: 100%;margin-right: 0;margin-left: 0;margin-top: 5px;">
+                    <div class="col" style="display:flex">
+                        <label asp-for="Attendance.PaymentMethod" class="control-label" style="width: 30%;">Maksmise viis:</label>
+                        <select asp-for="Attendance.PaymentMethod" class="form-control" style="width: 70%;">
+                            <option value="CreditCard">Pangaülekanne</option>
+                            <option value="Cash">Sularaha</option>
+                        </select>
+                    </div>
+                    <span asp-validation-for="Attendance.PaymentMethod" class="text-danger"></span>
+                </div>
+                <div class="row" style="width: 100%;margin-right: 0;margin-left: 0;margin-top: 5px; margin-bottom: 50px;">
+                    <div class="col" style="display:flex">
+                        <label asp-for="Attendance.AdditionalInformation" class="control-label" style="width: 30%;">Lisainfo:</label>
+                        <textarea asp-for="Attendance.AdditionalInformation" class="form-control" rows="2" style="width: 70%;"></textarea>
+                    </div>
+                    <span asp-validation-for="Attendance.AdditionalInformation" class="text-danger"></span>
+                </div>
+                <div class="row" style="width: 100%;margin-right: 0;margin-left: 0;margin-top: 5px; margin-bottom: 20px;">
+                    <div class="col" style="display:flex">
+                        <a asp-page="../Events/Details" class="btn btn-secondary" asp-route-id="@Model.Attendance.EventID" style="margin-right: 10px;">Tagasi</a> <input type="submit" value="Salvesta" class="btn btn-primary" />
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
 </div>
 
 @section Scripts {

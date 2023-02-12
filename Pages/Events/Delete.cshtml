@@ -5,42 +5,42 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Kustuta</h1>
 
-<h3>Kas oled kindel, et tahad yritust kustutada?</h3>
-<div>
-    <h4>Event</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Event.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Event.DateTime)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.DateTime)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Event.Place)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.Place)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Event.AdditionalInformation)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.AdditionalInformation)
-        </dd>
-    </dl>
-    
-    <form method="post">
-        <input type="hidden" asp-for="Event.EventID" />
-        <input type="submit" value="Kustuta" class="btn btn-danger" /> |
-        <a asp-page="../Index">Tagasi</a>
-    </form>
+<div class="row" style="display: flex; align-items:stretch; background-color: white; margin-top: 20px;">
+    <div style="display: flex;justify-content: space-between;overflow: hidden;height: 90px; padding:0;">
+        <h1 class="d-flex justify-content-center align-items-center" style="padding: 10px;width: 25%;background-color: #1f59a0;color: rgb(255,255,255);height: 100%;">Kustuta</h1>
+        <div style="width: 75%;height: auto;margin: 0;"><img src="~/images/libled.jpg" style="width: 100%;height: auto;object-fit: cover;"></div>
+    </div>
+    <h3 style="color: #1f59a0; padding:10px;">Kas oled kindel et tahad seda kustutada?</h3>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                Ürituse nimi:
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Event.Name)
+            </dd>
+            <dt class="col-sm-2">
+                Kuupäev & aeg:
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Event.DateTime)
+            </dd>
+            <dt class="col-sm-2">
+                Koht:
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Event.Place)
+            </dd>
+        </dl>
+
+        <form method="post">
+            <input type="hidden" asp-for="Event.EventID" />
+            <div class="col" style="display:flex; padding-bottom: 15px;">
+                <a asp-page="../Index" class="btn btn-secondary" style="margin-right: 10px;">Tagasi</a> <input type="submit" value="Kustuta" class="btn btn-danger" />
+            </div>
+        </form>
+    </div>
 </div>
+

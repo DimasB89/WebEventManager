@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebEventManager.Models
 {
@@ -14,6 +15,8 @@ namespace WebEventManager.Models
         [MaxLength(30)]
         public string Place { get; set; }
         public string AdditionalInformation { get; set; }
+        [NotMapped]
+        public string DateTimeString { get; set; }
 
         public ICollection<Attendance> Attendances { get; set; }
 

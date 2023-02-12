@@ -4,77 +4,79 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="row mb-auto">
-    <div class="col-md-4">
-        <div class="row no-gutters border mb-4">
-            <div class="col p-4 mb-4 ">
-                <p class="card-text">
-                    Sed faucibus nibh enim, sed cursus est varius quis. Duis id metus sit amet ligula ultricies hendrerit. Suspendisse nunc metus, venenatis finibus tellus lacinia, viverra luctus leo. Sed eu eros vel felis mollis aliquet. Cras vel viverra tellus. Donec dapibus bibendum ornare. In convallis eleifend orci, eu efficitur purus vulputate ac.
-                </p>
-            </div>
+
+    <div class="row" style="margin-top: 15px; display: flex; align-items: stretch;">
+        <div class="col-6" style="background-color: #1f59a0; color: #ecebec; padding: 0;">
+            <p class="p-4" style="font-size: 25px; text-align: left; padding-right: 10px;padding-left: 30px; height:100%;">Sed faucibus nibh enim, <span class="fw-bold">sed cursus</span> est varius quis. Duis id metus sit amet ligula ultricies hendrerit. <span class="fw-bold">Suspendisse nunc metus,</span> venenatis finibus tellus lacinia, viverra.</p>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="row no-gutters border mb-4">
-            <div class="col p-4 d-flex flex-column position-static">
-                <p class="card-text mb-auto">
-                    <img src="~/images/pilt.jpg" />
-                </p>
-            </div>
+        <div class="col-6" style="padding: 0;">
+            <img src="~/images/pilt.jpg" alt="" class="w-100">
         </div>
     </div>
 
-</div>
-<div class="row mb-auto" >
-    <div class="col-md-4">
-        <h3>Tulevased üritused</h3>
-        <table class="table">
+<div class="row" style="margin-top:15px">
+    <div class="col-6" style="background-color: white; padding: 0;">
+        <h3 class="customHeading" style="background-color: #1f59a0; color: #ecebec; text-align:center; height: 50px; width: 100%;">Tulevased üritused</h3>
+        <table class="table" style="border-collapse: collapse;">
             <tbody>
+                @{
+                    var counter = 1;
+                }
                 @foreach (var item in Model.GetUpcomingEvents)
                 {
+                    item.DateTimeString = item.DateTime.ToString("dd.MM.yyyy");
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
+                        <td width="50%">
+                            @counter. @Html.DisplayFor(modelItem => item.Name)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DateTime)
+                        <td width="25%">
+                            @Html.DisplayFor(modelItem => item.DateTimeString)
                         </td>
-                        <td>
-                            <div style="height: 25px; display:inline-block;">
-                                <a asp-page="./Events/Details" asp-route-id="@item.EventID" style="float:left;">Osavõtjad</a>
-                                <a asp-page="./Events/Delete" asp-route-id="@item.EventID" class="btn" style="float:right;">
-                                    <img src="~/images/remove.svg" height="15px" width="15px" />
+                        <td width="25%">
+                            <div style="height: 25px; display: flex; flex-wrap: nowrap;">
+                                <a class="link-custom2" asp-page="./Events/Details" asp-route-id="@item.EventID" style="float:left;">
+                                    OSAVÕTJAD</a>
+                                <a asp-page="./Events/Delete" asp-route-id="@item.EventID" class="btn" style="float:left; display: flex; align-items: center;">
+                                    <img src="~/images/remove.svg" height="15px" width="15px" style="margin: 0 auto;" />
                                 </a>
                             </div>
                         </td>
                     </tr>
+                    counter++;
                 }
             </tbody>
         </table>
-        <p>
-            <a asp-page="./Events/Create">Lisa Üritus</a>
+        <p style="padding-left: 30px; padding-bottom: 10px; margin-top: 100px;">
+            <a class="link-custom2"  asp-page="./Events/Create">LISA ÜRITUS</a>
         </p>
     </div>
 
-    <div class="col-md-4">
-        <h3>Toimunud üritused</h3>
-        <table class="table">
+    <div class="col-6-custom" style="background-color: white; padding: 0;">
+        <h3 class="customHeading" style="background-color: #1f59a0; color: #ecebec; text-align:center; height: 50px; width: 100%;">Toimunud üritused</h3>
+        <table class="table" style="border-collapse: collapse;">
             <tbody>
+                @{
+                    counter = 1;
+                }
                 @foreach (var item in Model.GetPastEvents)
                 {
+                    item.DateTimeString = item.DateTime.ToString("dd.MM.yyyy");
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
+                        <td width="50%">
+                            @counter. @Html.DisplayFor(modelItem => item.Name)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DateTime)
+                        <td width="25%">
+                            @Html.DisplayFor(modelItem => item.DateTimeString)
                         </td>
-                        <td>
-                            <div style="height: 25px; width: 25px;">
-                                <a asp-page="./Events/Details" asp-route-id="@item.EventID">Osavõtjad</a>
+                        <td width="25%">
+                            <div style="height: 25px; display:inline-block;">
+                                <a class="link-custom2" asp-page="./Events/Details" asp-route-id="@item.EventID" style="float:left;">
+                                    OSAVÕTJAD
+                                </a>
                             </div>
                         </td>
                     </tr>
+                    counter++;
                 }
             </tbody>
         </table>
