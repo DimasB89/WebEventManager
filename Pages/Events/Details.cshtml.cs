@@ -123,10 +123,12 @@ namespace WebEventManager.Pages.Events
                 }
                 return Page();
             }
+            
 
 
             //add participant
             Participant participant = new Participant();
+            
             if (selectedParticipantType == "PrivatePerson")
             {
                 participant = new Participant(NewPrivatePerson.FirstName, NewPrivatePerson.LastName, NewPrivatePerson.PersonalID);
