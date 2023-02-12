@@ -49,13 +49,13 @@ namespace WebEventManager.Data
                 new Attendance{ParticipantID=6, EventID=3, PaymentMethod = PaymentMethod.Cash, AdditionalInformation = "brings happiness"},
                 new Attendance{ParticipantID=7, EventID=4, PaymentMethod = PaymentMethod.CreditCard, AdditionalInformation = "brings no errors"},
                 new Attendance{ParticipantID=8, EventID=4, PaymentMethod = PaymentMethod.Cash, AdditionalInformation = "brings jobs for everyone"},*/
-                new Attendance(1, 1, PaymentMethod.CreditCard, "brings cake"),
+                new Attendance(1, 1, PaymentMethod.BankTransfer, "brings cake"),
                 new Attendance(2, 1, PaymentMethod.Cash, "brings joy"),
-                new Attendance(3, 2, PaymentMethod.CreditCard, "brings flowers"),
+                new Attendance(3, 2, PaymentMethod.BankTransfer, "brings flowers"),
                 new Attendance(4, 2, PaymentMethod.Cash, "brings fireworks"),
-                new Attendance(5, 3, PaymentMethod.CreditCard, "brings fun"),
+                new Attendance(5, 3, PaymentMethod.BankTransfer, "brings fun"),
                 new Attendance(6, 3, PaymentMethod.Cash, "brings happiness"),
-                new Attendance(7, 4, PaymentMethod.CreditCard, "brings no errors"),
+                new Attendance(7, 4, PaymentMethod.BankTransfer, "brings no errors"),
                 new Attendance(8, 4, PaymentMethod.Cash, "brings jobs for everyone"),
             };
 

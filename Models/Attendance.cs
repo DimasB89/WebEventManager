@@ -6,7 +6,7 @@ namespace WebEventManager.Models
 
     public enum PaymentMethod
     {
-        CreditCard,
+        BankTransfer,
         Cash
     }
 
