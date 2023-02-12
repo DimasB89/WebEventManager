@@ -7,12 +7,6 @@ namespace WebEventManager.Pages
 {
     public class IndexModel : PageModel
     {
-        //private readonly ILogger<IndexModel> _logger;
-
-        /*public IndexModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }*/
 
         private readonly EMContext _context;
         private DateTime _currentDateTime;

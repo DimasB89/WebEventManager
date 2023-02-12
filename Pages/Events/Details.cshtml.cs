@@ -10,15 +10,31 @@ using WebEventManager.Models;
 
 namespace WebEventManager.Pages.Events
 {
+    public struct ParticipantInfo
+    {
+        public string name;
+        public long id;
+        public bool isPerson;
+        public int actualID;
+
+        public ParticipantInfo(string name, long id, bool isPerson, int actualID)
+        {
+            this.name = name;
+            this.id = id;
+            this.isPerson = isPerson;
+            this.actualID = actualID;
+        }
+    }
+
     public class DetailsModel : PageModel
     {
         private readonly WebEventManager.Data.EMContext _context;
-        private List<(string name, long id, bool isPerson, int actualID)> _participants;
+        private List<ParticipantInfo> _participants;
 
         public DetailsModel(WebEventManager.Data.EMContext context)
         {
             _context = context;
-            _participants = new List<(string name, long id, bool isPerson, int actualID)> { };
+            _participants = new List<ParticipantInfo> { }; ;
         }
 
         [BindProperty]
@@ -33,9 +49,9 @@ namespace WebEventManager.Pages.Events
         [BindProperty]
         public Attendance NewAttendance { get; set; } = default!;
 
-        public IEnumerable<(string name, long id, bool isPerson, int actualID)> GetParticipants { get; set; }
+        public IEnumerable<ParticipantInfo> GetParticipants { get; set; }
 
-        
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -59,14 +75,14 @@ namespace WebEventManager.Pages.Events
                 PrivatePerson person = _context.PrivatePersons.FirstOrDefault(p => p.PrivatePersonID == participant.ParticipantID);
                 if (person != null)
                 {
-                    _participants.Add((person.FullName, person.PersonalID, true, person.PrivatePersonID));
+                    _participants.Add(new ParticipantInfo(person.FullName, person.PersonalID, true, person.PrivatePersonID));
                 }
                 else
                 {
                     Company company = _context.Companies.FirstOrDefault(c => c.CompanyID == participant.ParticipantID);
                     if (company != null)
                     {
-                        _participants.Add((company.Name, company.RegistryNumber, false, company.CompanyID));
+                        _participants.Add(new ParticipantInfo(company.Name, company.RegistryNumber, false, company.CompanyID));
                     }
                 }
             }

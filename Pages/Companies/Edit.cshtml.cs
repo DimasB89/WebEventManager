@@ -79,7 +79,6 @@ namespace WebEventManager.Pages.Companies
                 }
             }
 
-            //return RedirectToPage("./Index");//go back to event details page
             return RedirectToPage("../Events/Details", new { id = Attendance.EventID });
         }
 
